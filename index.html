@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coffee Date Invitation</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fbe8e7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-image: url('https://www.transparenttextures.com/patterns/coffee.png');
+            background-size: cover;
+            position: relative;
+            overflow: hidden;
+        }
+        .container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 400px;
+            position: relative;
+            z-index: 10;
+        }
+        h1 {
+            color: #6f4f1f;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin: 20px 0;
+            font-size: 20px;
+        }
+        .btn {
+            background-color: #6f4f1f;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px;
+            transition: transform 0.3s ease-in-out;
+        }
+        .btn:hover {
+            background-color: #4e3629;
+            transform: scale(1.1);
+        }
+        #gif {
+            display: none;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #text {
+            display: none;
+            font-size: 18px;
+            color: #6f4f1f;
+            margin-top: 20px;
+            transition: opacity 0.5s ease-in-out;
+        }
+        #text.show {
+            opacity: 1;
+        }
+        #gif.show {
+            display: block;
+            opacity: 1;
+        }
+        #background-decorations {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        #background-decorations img {
+            position: absolute;
+            transition: opacity 1s ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes randomMove {
+    0% {
+        transform: translate(var(--random-x), var(--random-y));
+    }
+    25% {
+        transform: translate(calc(var(--random-x) + 20px), calc(var(--random-y) + 150px)); /* slight change */
+    }
+    50% {
+        transform: translate(calc(var(--random-x) - 30px), calc(var(--random-y) + 400px)); /* more significant change */
+    }
+    75% {
+        transform: translate(calc(var(--random-x) + 10px), calc(var(--random-y) - 245px)); /* slight change */
+    }
+    100% {
+        transform: translate(var(--random-x), var(--random-y)); /* back to original position */
+    }
+}
+
+
+    </style>
+</head>
+<body>
+    <div id="background-decorations">
+        <img id="coffeeGif" src="https://media4.giphy.com/media/v1.Y2lkPTc5MGI3NjExZmNhMDkyNjd4cTE5aXM2djVueHczZ2JqenRiMzMxZzI2aWhvMmUwciZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3oriO04qxVReM5rJEA/giphy.gif" alt="Coffee Cup" style="display: none;">
+        <img id="airsoftGif" src="https://i.makeagif.com/media/4-14-2023/bef68e.gif" alt="Airsoft Gun" style="display: none;">
+        <img id="candyGif" src="https://media4.giphy.com/media/lTS2kYBiaroJB993BK/giphy.gif?cid=6c09b9522b4qhv2f4yzmf7i2qrs4gprdk1sh1vbv2m3vd2hr&ep=v1_stickers_search&rid=giphy.gif&ct=s" alt="Candy" style="display: none;">
+    </div>
+
+    <div class="container">
+        <h1>Hey, would you like to grab a coffee with me?</h1>
+
+        <div class="question">
+            <p>Do you like coffee?</p>
+            <button class="btn" onclick="answer('yes', 1)">Yes</button>
+            <button class="btn" onclick="answer('no', 1)">No</button>
+        </div>
+
+        <div class="question">
+            <p>Would you enjoy spending time with me?</p>
+            <button class="btn" onclick="answer('yes', 2)">Yes</button>
+            <button class="btn" onclick="answer('no', 2)">No</button>
+        </div>
+
+        <div class="question">
+            <p>Are you free this weekend?</p>
+            <button class="btn" onclick="answer('yes', 3)">Yes</button>
+            <button class="btn" onclick="answer('no', 3)">No</button>
+        </div>
+
+        <div id="text" class="show">
+            <p>I will ask for one more time.</p>
+        </div>
+    </div>
+
+    <script>
+        function answer(choice, question) {
+            let gifElement = document.getElementById('gif-' + question);
+            let textElement = document.getElementById('text');
+
+            // Hide all previous gifs
+            let allGifs = document.querySelectorAll('#background-decorations img');
+            allGifs.forEach(function(gif) {
+                gif.style.opacity = 0;
+            });
+
+            if (choice === 'no') {
+                gifElement.src = question === 1 ? 'https://media3.giphy.com/media/x9cDy0c3bOxxwDZmJm/giphy.gif?cid=6c09b952df2xfl2ydhpm8mmborbkjqnpx1dq6qikksbc9jgw&ep=v1_gifs_search&rid=giphy.gif&ct=g' : question === 2 ? 'https://media3.giphy.com/media/l1J9M7lE10fgMvIRe/giphy.gif' : 'https://media3.giphy.com/media/2ACmrzftcpjF0R6N6g/giphy.gif';
+                gifElement.classList.add('show');
+                textElement.classList.add('show');
+                setTimeout(function() {
+                    alert("I'll ask one more time!");
+                }, 1000);
+            } else {
+                if (question === 1 && choice === 'yes') {
+                    // First "Yes" - Show coffeeGif
+                    document.getElementById('coffeeGif').style.display = 'block';
+                    document.getElementById('coffeeGif').style.opacity = 1;
+                    setTimeout(function() {
+                        alert("Great! Coffee it is!");
+                    }, 500);
+                } else if (question === 2 && choice === 'yes') {
+                    // Second "Yes" - Show airsoftGif
+                    document.getElementById('airsoftGif').style.display = 'block';
+                    document.getElementById('airsoftGif').style.opacity = 1;
+                    setTimeout(function() {
+                        alert("Awesome! Let's have fun with some airsoft!");
+                    }, 500);
+                } else if (question === 3 && choice === 'yes') {
+                    // Third "Yes" - Show candyGif
+                    document.getElementById('candyGif').style.display = 'block';
+                    document.getElementById('candyGif').style.opacity = 1;
+                    setTimeout(function() {
+                        alert("Time: 10:00 AM\nPlace: Coffee Shop at the college.\nهم بكيفج ترى");
+                    }, 2000);
+                }
+            }
+        }
+
+        function setRandomPositions() {
+            const gifs = document.querySelectorAll('#background-decorations img');
+
+            gifs.forEach((gif, index) => {
+                // Vertical position (evenly spaced)
+                const verticalPosition = (index * 200) + 100; // Spaced 200px apart
+
+                // Horizontal position (random within a certain range for each GIF)
+                let randomX;
+                if (index % 3 === 0) {
+                    randomX = Math.floor(Math.random() * 600) + 100; // First range
+                } else if (index % 3 === 1) {
+                    randomX = Math.floor(Math.random() * 700) - 500; // Second range
+                } else {
+                    randomX = Math.floor(Math.random() * 300) - 100; // Third range
+                }
+
+                // Set the random positions as CSS variables for each GIF
+                gif.style.setProperty('--random-x', `${randomX}px`);
+                gif.style.setProperty('--random-y', `${verticalPosition}px`);
+
+                // Apply the animation
+                gif.style.animation = 'randomMove 5s infinite ease-in-out';
+            });
+        }
+
+        // Call the function to set random positions when the page loads
+        window.onload = function() {
+            setRandomPositions();
+            // Optionally, update the positions every 5 seconds
+            setInterval(setRandomPositions, 5000);
+        };
+    </script>
+</body>
+</html>
